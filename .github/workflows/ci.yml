@@ -79,6 +79,11 @@ jobs:
           python -m build --wheel --outdir dist
           ls -al dist
 
+      - name: Debug S3 bucket value   # ✅ This shows us IF the secret is passed properly
+        run: echo "Bucket is → $S3_BUCKET_NAME"
+        env:
+          S3_BUCKET_NAME: ${{ secrets.S3_BUCKET_NAME }}
+
       - name: Upload wheel to S3
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
